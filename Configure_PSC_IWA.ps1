@@ -48,8 +48,8 @@ Write-Host "Copying PSC configuration files"
 #### PATH to sso-add-native-ad-idp.sh located in UTILS
 $scriptA = ./Utils/sso_import.sh
 $scriptB = ./Utils/sso-add-native-ad-idp.sh
-Copy-VMGuestFile -Source $scriptA -Destination "/home/" -force -VM $($psc_vm) -LocalToGuest -GuestUser "root" -GuestPassword $mycreds
-Copy-VMGuestFile -Source $scriptB -Destination "/home/" -force -VM $($psc_vm) -LocalToGuest -GuestUser "root" -GuestPassword $mycreds
+Copy-VMGuestFile -Source $scriptA -Destination "/home/" -force -VM $($psc) -LocalToGuest -GuestUser "root" -GuestPassword $mycreds
+Copy-VMGuestFile -Source $scriptB -Destination "/home/" -force -VM $($psc) -LocalToGuest -GuestUser "root" -GuestPassword $mycreds
 
 Start-Sleep -Seconds 60
 $session = $(New-SSHSession -ComputerName $psc -Username "root" -Password $mycreds)
