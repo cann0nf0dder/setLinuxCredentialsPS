@@ -7,7 +7,7 @@ PURPOSE:     This script will join AD and configure IWA on VMware PSC v6.0,6.5 (
              EDIT you AD OU  Line 34
 					                                                                                         
 OUTPUT:      N/A
-REQUIRED UTILITIES: PowerCLI, Utils dir with nested sh scripts
+REQUIRED UTILITIES: PowerCLI, SSHSessions Utils dir with nested sh scripts
                              
                         
 ==========================================================================
@@ -67,7 +67,7 @@ $session = $(New-SSHSession -ComputerName $psc -Username "root" -Password $mycre
                             Invoke-SshCommand -ComputerName $psc -Command "echo 'dn: cn=vsphere.local,cn=Tenants,cn=IdentityManager,cn=Services,dc=vsphere,dc=local' > /tmp/ad.ldif"
                             Invoke-SshCommand -ComputerName $psc -Command "echo 'changetype: modify' >> /tmp/ad.ldif"
                             Invoke-SshCommand -ComputerName $psc -Command "echo 'replace: vmwSTSDefaultIdentityProvider' >> /tmp/ad.ldif"
-                            Invoke-SshCommand -ComputerName $psc -Command "echo 'vmwSTSDefaultIdentityProvider: XT.LOCAL' >> /tmp/ad.ldif"
+                            Invoke-SshCommand -ComputerName $psc -Command "echo 'vmwSTSDefaultIdentityProvider: $domain' >> /tmp/ad.ldif"
                             Invoke-SshCommand -ComputerName $psc -Command "echo '-' >> /tmp/ad.ldif"
                             Invoke-SshCommand -ComputerName $psc -Command "/opt/likewise/bin/ldapmodify -f /tmp/ad.ldif -h localhost -p 11711 -D `"cn=Administrator,cn=Users,dc=vsphere,dc=local`" -w $creds_erpm"                
     }
