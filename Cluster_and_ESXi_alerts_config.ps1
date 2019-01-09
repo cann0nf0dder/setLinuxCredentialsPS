@@ -23,7 +23,7 @@ CHANGE HISTORY:
                 
 #>
 param(
-[Parameter(Mandatory=$true)][String]$cluster,
+[Parameter(Mandatory=$true)][String]$mycluster,
 [Parameter(Mandatory=$true)][int]$enable
 )
 
